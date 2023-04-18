@@ -1,0 +1,19 @@
+# development
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: shopify_inventory_app
+  pool: 5
+  username: <%= Rails.application.credentials[:database][:db_user] %>
+  password: <%= Rails.application.credentials[:database][:db_pass] %>
+
+# prod
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: sample_postgres_production
+  pool: 5
+  username: sample_postgres
+  password:
