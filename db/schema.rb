@@ -10,14 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_133422) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_073548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "inventories", force: :cascade do |t|
-    t.jsonb "details"
+    t.string "title"
+    t.text "body_html"
+    t.string "vendor"
+    t.string "status"
+    t.string "product_type"
+    t.string "handle"
+    t.datetime "edited_at"
+    t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_inventories_on_title"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "inventory_id", null: false
+    t.integer "status"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inventory_id"], name: "index_notifications_on_inventory_id"
+  end
+
+  add_foreign_key "notifications", "inventories"
 end
